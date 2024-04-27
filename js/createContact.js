@@ -18,7 +18,7 @@ function createContact() {
     console.log("Creating Contact...");
     const contactperson = new contact_1.Contact(fName, lName, address, city, state, zip, pNumber, email);
     console.log("Contact Created...");
-    console.log(contactperson);
+    // console.log(contactperson)
     return contactperson;
 }
 exports.default = createContact;

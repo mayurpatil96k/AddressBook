@@ -8,6 +8,11 @@ const prompt = PromptSync();
 })();
 
 const AddressBook = new Set();
+
+const System = new Map();
+System.set("AddressBook1",AddressBook)
+
+
 AddressBook.add(createContact());
 
 for (const contact of AddressBook) {

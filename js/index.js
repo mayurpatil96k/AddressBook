@@ -11,6 +11,8 @@ const prompt = (0, prompt_sync_1.default)();
     console.log("Welcome to Address Book Program");
 })();
 const AddressBook = new Set();
+const System = new Map();
+System.set("AddressBook1", AddressBook);
 AddressBook.add((0, createContact_1.default)());
 for (const contact of AddressBook) {
     if (contact instanceof contact_1.Contact) {
@@ -54,5 +56,17 @@ function deleteContact(fname, lName) {
     });
     console.log("Contact not found...");
 }
-deleteContact("Mayur", "Patil");
-console.log(AddressBook);
+// deleteContact("Mayur","Patil");   deleting contact...
+// console.log(AddressBook);
+function search(name) {
+    for (let addbook of System.values()) {
+        addbook.forEach((element) => {
+            if (element instanceof contact_1.Contact) {
+                if (element.city == name || element.state == name) {
+                    console.log(element);
+                }
+            }
+        });
+    }
+}
+search("sakri");

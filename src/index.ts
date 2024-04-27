@@ -62,4 +62,22 @@ function deleteContact(fname: String,lName: string){
 }
 
 // deleteContact("Mayur","Patil");   deleting contact...
-console.log(AddressBook);
+// console.log(AddressBook);
+
+
+function search(name: string){
+    let cnt = 0;
+    for(let addbook of System.values()){
+        addbook.forEach((element: any) =>{
+            if(element instanceof Contact){
+            if(element.city==name || element.state==name){
+                console.log(cnt+" contact found with matching state and city...")
+                console.log(element)
+                cnt++;
+            }
+        }
+        })
+    }
+}
+
+// search("sakri");

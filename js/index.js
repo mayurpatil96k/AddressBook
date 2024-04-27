@@ -41,4 +41,18 @@ function editContact(name) {
         }
     });
 }
-editContact("mayur");
+// editContact("mayur");  Editing contact
+function deleteContact(fname, lName) {
+    console.log("Searching Record for name " + fname + " " + lName);
+    AddressBook.forEach(element => {
+        if (element instanceof contact_1.Contact) {
+            if (element.fName == fname && element.lName == lName) {
+                AddressBook.delete(element);
+                console.log("contact deleted...");
+            }
+        }
+    });
+    console.log("Contact not found...");
+}
+deleteContact("Mayur", "Patil");
+console.log(AddressBook);

@@ -80,4 +80,20 @@ function search(name: string){
     }
 }
 
-// search("sakri");
+// search("sakri"); search the contact by city or state
+
+function getCount(name: string){
+    let cnt = 0;
+    for(let addbook of System.values()){
+        addbook.forEach((element: any) =>{
+            if(element instanceof Contact){
+            if(element.city==name || element.state==name){
+                cnt++;
+            }
+        }
+        })
+    }
+    return cnt;
+}
+
+// console.log(getCount("Sakri")); get the count of contacts in specific city

@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const contact_1 = require("./contact");
 const createContact_1 = __importDefault(require("./createContact"));
 const prompt_sync_1 = __importDefault(require("prompt-sync"));
+const fs_1 = __importDefault(require("fs"));
 const prompt = (0, prompt_sync_1.default)();
 (function () {
     console.log("Welcome to Address Book Program");
@@ -96,6 +97,33 @@ function sort() {
         System.set(key, new Set(sortedContacts));
     }
 }
-sort();
-console.log(System);
-console.log(AddressBook);
+function sortByParam(param) {
+    for (let [key, addressBook] of System) {
+        console.log(`Sorting contacts in AddressBook: ${key}`);
+        let sortedContacts = Array.from(addressBook);
+        sortedContacts.sort((a, b) => {
+            switch (param) {
+                case 'city':
+                    return a.city.localeCompare(b.city);
+                case 'state':
+                    return a.state.localeCompare(b.state);
+                case 'zip':
+                    return a.zip - b.zip;
+                default:
+                    throw new Error('Invalid parameter for sorting.');
+            }
+        });
+        System.set(key, new Set(sortedContacts));
+    }
+}
+// sortByParam("city"); 
+// console.log(System); code usage for sort by parameter use case 12
+function writeInFile() {
+    fs_1.default.writeFileSync("contacts.txt", JSON.stringify(Array.from(AddressBook)));
+}
+// writeInFile();
+// make it correct
+function readFile() {
+    console.log(fs_1.default.readFileSync("contacts.txt", 'utf8'));
+}
+readFile();

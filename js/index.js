@@ -14,6 +14,7 @@ const AddressBook = new Set();
 const System = new Map();
 System.set("AddressBook1", AddressBook);
 AddressBook.add((0, createContact_1.default)());
+AddressBook.add((0, createContact_1.default)());
 for (const contact of AddressBook) {
     if (contact instanceof contact_1.Contact) {
         console.log(contact.fName);
@@ -59,14 +60,42 @@ function deleteContact(fname, lName) {
 // deleteContact("Mayur","Patil");   deleting contact...
 // console.log(AddressBook);
 function search(name) {
+    let cnt = 0;
     for (let addbook of System.values()) {
         addbook.forEach((element) => {
             if (element instanceof contact_1.Contact) {
                 if (element.city == name || element.state == name) {
+                    console.log(cnt + " contact found with matching state and city...");
                     console.log(element);
+                    cnt++;
                 }
             }
         });
     }
 }
-search("sakri");
+// search("sakri"); search the contact by city or state
+function getCount(name) {
+    let cnt = 0;
+    for (let addbook of System.values()) {
+        addbook.forEach((element) => {
+            if (element instanceof contact_1.Contact) {
+                if (element.city == name || element.state == name) {
+                    cnt++;
+                }
+            }
+        });
+    }
+    return cnt;
+}
+// console.log(getCount("Sakri")); get the count of contacts in specific city
+function sort() {
+    for (let [key, addressBook] of System) {
+        console.log(`Sorting contacts in AddressBook: ${key}`);
+        let sortedContacts = Array.from(addressBook);
+        sortedContacts.sort((a, b) => a.fName.localeCompare(b.fName));
+        System.set(key, new Set(sortedContacts));
+    }
+}
+sort();
+console.log(System);
+console.log(AddressBook);

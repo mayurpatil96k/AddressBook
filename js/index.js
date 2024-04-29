@@ -159,6 +159,15 @@ function writeInCsv() {
         .then(() => console.log('CSV file written successfully'))
         .catch((error) => console.error('Error writing CSV file:', error));
 }
-writeInCsv();
+// writeInCsv();
 // Example usage:
 // writeInCsv();
+function writeInJson() {
+    fs_1.default.writeFileSync("json.json", JSON.stringify(Array.from(AddressBook)));
+}
+// writeInJson();
+function readOnJson() {
+    const data = fs_1.default.readFileSync("json.json", 'utf8');
+    console.log(JSON.parse(data));
+}
+readFile();

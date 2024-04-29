@@ -126,4 +126,39 @@ function writeInFile() {
 function readFile() {
     console.log(fs_1.default.readFileSync("contacts.txt", 'utf8'));
 }
-readFile();
+// readFile();
+const csv_writer_1 = require("csv-writer");
+function writeInCsv() {
+    const header = [
+        { id: 'fName', title: 'First Name' },
+        { id: 'lName', title: 'Last Name' },
+        { id: 'address', title: 'Address' },
+        { id: 'city', title: 'City' },
+        { id: 'state', title: 'State' },
+        { id: 'zip', title: 'Zip' },
+        { id: 'pNumber', title: 'Phone' },
+        { id: 'email', title: 'Email' }
+    ];
+    const data = Array.from(AddressBook).map(contact => ({
+        fName: contact.fName,
+        lName: contact.lName,
+        address: contact.address,
+        city: contact.city,
+        state: contact.state,
+        zip: contact.zip,
+        phone: contact.pnumber,
+        email: contact.email
+    }));
+    // Create CSV writer
+    const csvWriter = (0, csv_writer_1.createObjectCsvWriter)({
+        path: 'contacts.csv',
+        header: header
+    });
+    // Write to CSV file
+    csvWriter.writeRecords(data)
+        .then(() => console.log('CSV file written successfully'))
+        .catch((error) => console.error('Error writing CSV file:', error));
+}
+writeInCsv();
+// Example usage:
+// writeInCsv();
